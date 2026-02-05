@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>House Price Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>📘 <span class="green">About Project</span></h2>
+        <p>This House Price Prediction App uses a trained Machine Learning model to estimate house prices based on several input parameters.</p>
+        <h3>🛠 Built with:</h3>
+        <ul>
+            <li>Python</li>
+            <li>Flask</li>
+            <li>ML algo - Random Forest Regressor</li>
+            <li>HTML & CSS</li>
+        </ul>
+        <div class="footer">
+            <h3>💻 Developed by: Kushagra Srivastawa</h3>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="form-container">
+            <h1>🏠 <span class="green">House Price Prediction</span></h1>
+
+            {% if error %}
+                <div class="error-message">{{ error }}</div>
+            {% endif %}
+
+            <form action="/predict" method="post">
+                <label>Location:</label>
+                <select name="location" required>
+                    <option>Delhi</option>
+                    <option>Pune</option>
+                    <option>Mumbai</option>
+                    <option>Bangalore</option>
+                    <option>Hyderabad</option>
+                    <option>Chennai</option>
+                </select>
+
+                <label>Property Type:</label>
+                <select name="property_type" required>
+                    <option>Apartment</option>
+                    <option>Independent House</option>
+                    <option>Villa</option>
+                </select>
+
+                <label>Total Area in sq ft: (605 - 3994)</label>
+                <input type="number" name="area" required>
+
+                <label>Bedrooms: (1 - 5)</label>
+                <input type="number" name="bhk" required>
+
+                <label>Bathrooms: (1 - 4)</label>
+                <input type="number" name="bathrooms" required>
+
+                
+                <label>Balcony Count:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="balcony" value="0" required> 0</label>
+                    <label><input type="radio" name="balcony" value="1"> 1</label>
+                    <label><input type="radio" name="balcony" value="2"> 2</label>
+                    <label><input type="radio" name="balcony" value="3"> 3</label>
+                </div>
+
+
+                <label>Furnishing Status:</label>
+                <select name="furnishing" required>
+                    <option>Furnished</option>
+                    <option>Semi-Furnished</option>
+                    <option>Unfurnished</option>
+                </select>
+
+                <label>Parking Available:</label>
+                <select name="parking" required>
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+
+                <button type="submit">Predict Price</button>
+            </form>
+
+            <!-- Loading Spinner -->
+            <div id="loading-spinner" class="spinner-overlay" style="display:none;">
+                <div class="spinner"></div>
+            </div>
+
+            <!-- Price Modal -->
+            {% if prediction %}
+            <div class="modal-overlay" id="priceModal">
+                <div class="modal">
+                    <h2>💰 Predicted Price</h2>
+                    <p>₹ {{ prediction }}</p>
+                    <button onclick="closeModal()">Close</button>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function closeModal() {
+            document.getElementById("priceModal").style.display = "none";
+        }
+
+        window.onload = () => {
+            document.getElementById('loading-spinner').style.display = 'none';
+        };
+    </script>
+</body>
+</html>
