@@ -52,12 +52,3 @@ Model performance was evaluated using **R² Score and Mean Absolute Error (MAE)*
 ## 📈 What I Learned
 This project helped me gain hands-on experience in **machine learning regression**, **data preprocessing**, and **feature engineering**.  
 I also learned how to evaluate models properly and deploy them as **web applications**, making data science solutions usable in real-world scenarios.
-
----
-
-## ▶️ How to Run the Project
-```bash
-git clone https://github.com/your-username/house-price-prediction.git
-cd house-price-prediction
-pip install -r requirements.txt
-python app.py
